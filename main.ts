@@ -49,7 +49,7 @@ const normalizeData = (unnormalizedData: testData[]) => {
   const filteredObject: FilteredInfo = {
     allId: [],
   };
-  let data: Array<string> = unnormalizedData.map((el) => el.id);
+  let data = unnormalizedData.map((el) => el.id);
 
   if (Array.isArray(filteredObject.allId)) {
     filteredObject.allId.push(data);

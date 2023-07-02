@@ -41,21 +41,25 @@ interface testData {
   title: string;
   body: string;
 }
-interface FilteredInfo {
-  allId: string[];
+
+interface myObject {
+  byId: {
+    [key: string]: object;
+  };
+  allIds: string[];
 }
 
+const myObj: myObject = {
+  byId: {},
+  allIds: [],
+};
+
 const normalizeData = (unnormalizedData: testData[]) => {
-  const filteredObject: FilteredInfo = {
-    allId: [],
-  };
-  let data = unnormalizedData.map((el) => el.id);
-
-  if (Array.isArray(filteredObject.allId)) {
-    filteredObject.allId.push(data);
-  }
-
-  return filteredObject;
+  return unnormalizedData.reduce((obj, value) => {
+    obj.byId[value.id] = value;
+    obj.allIds.push(value.id);
+    return obj;
+  }, myObj);
 };
 
 console.log(normalizeData(posts));

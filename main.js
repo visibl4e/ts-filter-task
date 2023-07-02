@@ -36,14 +36,21 @@ const posts = [
         body: "maiores sed dolores similique labore et inventore etquasi temporibus esse sunt id eteos voluptatem aliquamratione corporis molestiae mollitia quia et magnam dolor",
     },
 ];
-const normalizeData = (unnormalizedData) => {
-    const filteredObject = {
-        allId: [],
-    };
-    let data = unnormalizedData.map((el) => el.id);
-    if (Array.isArray(filteredObject.allId)) {
-        filteredObject.allId.push(data);
-    }
-    return filteredObject;
+const myObj = {
+    byId: {},
+    allIds: [],
 };
+const normalizeData = (unnormalizedData) => {
+    return unnormalizedData.reduce((obj, value) => {
+        obj.byId[value.id] = value;
+        obj.allIds.push(value.id);
+        return obj;
+    }, myObj);
+};
+// let data = unnormalizedData.map((el) => el.id);
+// if (Array.isArray(filteredObject.allId)) {
+//   filteredObject.allId.push(data);
+// }
+// return filteredObject;
+// };
 console.log(normalizeData(posts));
